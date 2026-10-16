@@ -72,7 +72,7 @@ TubeQuiz accepts structured JSON directly output by Gemini:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/tubequiz.git
+   git clone https://github.com/deepak4728/tubequiz.git
    cd tubequiz
    ```
 
