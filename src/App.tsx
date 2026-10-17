@@ -41,6 +41,7 @@ export default function App() {
   const [roughHeight, setRoughHeight] = useState<number>(140);
   const [sideWidth, setSideWidth] = useState<number>(40);
   const [includeAnswerKey, setIncludeAnswerKey] = useState<boolean>(true);
+  const [showOptions, setShowOptions] = useState<boolean>(true);
 
   // Exam Data
   const [examData, setExamData] = useState<ExamData>({
@@ -434,15 +435,27 @@ ${url}`;
             </div>
           )}
 
-          <label className="flex items-center space-x-2 cursor-pointer select-none ml-auto">
-            <input
-              type="checkbox"
-              checked={includeAnswerKey}
-              onChange={(e) => setIncludeAnswerKey(e.target.checked)}
-              className="rounded text-indigo-600 focus:ring-indigo-500 h-4 w-4"
-            />
-            <span className="text-xs font-semibold text-slate-700">Include Official Answer Key at End</span>
-          </label>
+          <div className="flex flex-wrap items-center gap-4 ml-auto">
+            <label className="flex items-center space-x-2 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={showOptions}
+                onChange={(e) => setShowOptions(e.target.checked)}
+                className="rounded text-indigo-600 focus:ring-indigo-500 h-4 w-4"
+              />
+              <span className="text-xs font-semibold text-slate-700">Show MCQ Options (A, B, C, D)</span>
+            </label>
+
+            <label className="flex items-center space-x-2 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={includeAnswerKey}
+                onChange={(e) => setIncludeAnswerKey(e.target.checked)}
+                className="rounded text-indigo-600 focus:ring-indigo-500 h-4 w-4"
+              />
+              <span className="text-xs font-semibold text-slate-700">Include Official Answer Key at End</span>
+            </label>
+          </div>
         </div>
 
         {/* Action Bar */}
@@ -489,7 +502,8 @@ ${url}`;
           <div className="flex justify-between items-center text-xs text-slate-600 font-semibold mt-2">
             <span>Total Questions: {examData.questions.length}</span>
             <span>{questionCols} Columns Layout</span>
-            <span>{includeAnswerKey ? 'Answer Key Attached' : 'Questions Only'}</span>
+            <span>{showOptions ? 'With Options' : 'Questions Only'}</span>
+            <span>{includeAnswerKey ? 'Answer Key Attached' : 'No Key'}</span>
           </div>
         </div>
 
@@ -512,12 +526,14 @@ ${url}`;
                           <div className="font-bold text-slate-900 mb-1.5">
                             Q{q.id || idx + 1}. {q.question}
                           </div>
-                          <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-slate-700">
-                            <div><span className="font-semibold text-slate-900">(A)</span> {opts.A}</div>
-                            <div><span className="font-semibold text-slate-900">(B)</span> {opts.B}</div>
-                            <div><span className="font-semibold text-slate-900">(C)</span> {opts.C}</div>
-                            <div><span className="font-semibold text-slate-900">(D)</span> {opts.D}</div>
-                          </div>
+                          {showOptions && (
+                            <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-slate-700">
+                              <div><span className="font-semibold text-slate-900">(A)</span> {opts.A}</div>
+                              <div><span className="font-semibold text-slate-900">(B)</span> {opts.B}</div>
+                              <div><span className="font-semibold text-slate-900">(C)</span> {opts.C}</div>
+                              <div><span className="font-semibold text-slate-900">(D)</span> {opts.D}</div>
+                            </div>
+                          )}
                         </div>
                       );
                     })}
@@ -557,12 +573,14 @@ ${url}`;
                       <div className="font-bold text-slate-900 mb-1.5">
                         Q{q.id || idx + 1}. {q.question}
                       </div>
-                      <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-slate-700">
-                        <div><span className="font-semibold text-slate-900">(A)</span> {opts.A}</div>
-                        <div><span className="font-semibold text-slate-900">(B)</span> {opts.B}</div>
-                        <div><span className="font-semibold text-slate-900">(C)</span> {opts.C}</div>
-                        <div><span className="font-semibold text-slate-900">(D)</span> {opts.D}</div>
-                      </div>
+                      {showOptions && (
+                        <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-slate-700">
+                          <div><span className="font-semibold text-slate-900">(A)</span> {opts.A}</div>
+                          <div><span className="font-semibold text-slate-900">(B)</span> {opts.B}</div>
+                          <div><span className="font-semibold text-slate-900">(C)</span> {opts.C}</div>
+                          <div><span className="font-semibold text-slate-900">(D)</span> {opts.D}</div>
+                        </div>
+                      )}
                     </div>
                   );
                 })}
@@ -595,12 +613,14 @@ ${url}`;
                     <div className="font-bold text-slate-900 mb-1.5">
                       Q{q.id || idx + 1}. {q.question}
                     </div>
-                    <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-slate-700">
-                      <div><span className="font-semibold text-slate-900">(A)</span> {opts.A}</div>
-                      <div><span className="font-semibold text-slate-900">(B)</span> {opts.B}</div>
-                      <div><span className="font-semibold text-slate-900">(C)</span> {opts.C}</div>
-                      <div><span className="font-semibold text-slate-900">(D)</span> {opts.D}</div>
-                    </div>
+                    {showOptions && (
+                      <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-slate-700">
+                        <div><span className="font-semibold text-slate-900">(A)</span> {opts.A}</div>
+                        <div><span className="font-semibold text-slate-900">(B)</span> {opts.B}</div>
+                        <div><span className="font-semibold text-slate-900">(C)</span> {opts.C}</div>
+                        <div><span className="font-semibold text-slate-900">(D)</span> {opts.D}</div>
+                      </div>
+                    )}
                   </div>
                 );
               })}

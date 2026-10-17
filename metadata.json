@@ -1,6 +1,6 @@
 {
   "name": "TubeQuiz",
-  "description": "Transform YouTube lectures and MCQs into professional 60/40 split-column exam papers with custom handwritten note margins and official answer sheets.",
+  "description": "Transform YouTube lectures and MCQs into professional, customizable exam papers with adjustable handwritten note margins and official answer sheets.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
